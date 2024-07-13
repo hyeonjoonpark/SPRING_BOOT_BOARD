@@ -1,7 +1,11 @@
-package com.hj.projectboard.domain;
+package com.hj.projectboard.domain.article_comment;
 
+import com.hj.projectboard.domain.article.Article;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -9,38 +13,28 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Objects;
 
 @Getter
-@ToString
 @Table(indexes = {
-        @Index(columnList = "title"),
-        @Index(columnList = "hashtag"),
+        @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Article {
+public class ArticleComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Setter
-    @Column(nullable = false)
-    private String title;
-
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "article_id")
+    private Article article; // 게시글 (ID)
     @Setter
-    @Column(nullable = false, length = 10000)
+    @Column(nullable = false, length = 500)
     private String content;
-
-    private String hashTag;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("id")
-    @ToString.Exclude
-    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
     @CreatedDate
     @Column(nullable = false)
@@ -58,22 +52,20 @@ public class Article {
     @Column(nullable = false, length = 100)
     private String modifiedBy;
 
-
-    private Article(String title, String content, String hashTag) {
-        this.title = title;
+    private ArticleComment(Article article, String content) {
+        this.article = article;
         this.content = content;
-        this.hashTag = hashTag;
     }
 
-    public static Article of(String title, String content, String hashTag) {
-        return new Article(title, content, hashTag);
+    public static ArticleComment of(Article article, String content) {
+        return new ArticleComment(article, content);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Article article)) return false;
-        return id != null && Objects.equals(id, article.id);
+        if (!(o instanceof ArticleComment that)) return false;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
