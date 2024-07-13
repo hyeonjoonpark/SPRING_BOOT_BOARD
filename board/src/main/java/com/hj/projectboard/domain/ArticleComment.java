@@ -29,7 +29,6 @@ public class ArticleComment {
     private Long id;
     @Setter
     @ManyToOne(optional = false)
-    @JoinColumn(name = "article_id")
     private Article article; // 게시글 (ID)
     @Setter
     @Column(nullable = false, length = 500)
