@@ -22,10 +22,10 @@ spring:
   data:
     rest:
       detection-strategy: annotated
+      base-path: /api
 
 server:
   servlet:
-    context-path: /api
     encoding:
       charset: UTF-8
       enabled: true
