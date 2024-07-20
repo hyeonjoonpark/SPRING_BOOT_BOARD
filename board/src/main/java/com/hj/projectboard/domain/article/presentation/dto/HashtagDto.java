@@ -5,9 +5,6 @@ import com.hj.projectboard.domain.article.Hashtag;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * DTO for {@link com.hj.projectboard.domain.article.Article}
- */
 public record HashtagDto(
         Long id,
         String hashtagName,
