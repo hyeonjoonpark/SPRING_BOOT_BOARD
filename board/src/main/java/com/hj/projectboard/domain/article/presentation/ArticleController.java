@@ -1,4 +1,4 @@
-package com.hj.projectboard.domain.article.controller;
+package com.hj.projectboard.domain.article.presentation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
