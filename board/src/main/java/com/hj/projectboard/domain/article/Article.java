@@ -41,6 +41,7 @@ public class Article extends AuditingFields {
             inverseJoinColumns = @JoinColumn(name = "hashtagId")
     )
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Setter
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
 

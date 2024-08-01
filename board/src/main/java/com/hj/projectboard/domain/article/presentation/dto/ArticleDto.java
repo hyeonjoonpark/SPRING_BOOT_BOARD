@@ -43,7 +43,7 @@ public record ArticleDto(
         );
     }
 
-    public Article toarticle(UserAccount userAccount) {
+    public Article toEntity(UserAccount userAccount) {
         return Article.of(
                 userAccount,
                 title,
