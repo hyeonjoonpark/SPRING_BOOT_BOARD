@@ -1,6 +1,7 @@
 package com.hj.projectboard.domain.article.presentation.dto;
 
 import com.hj.projectboard.domain.article.Article;
+import com.hj.projectboard.domain.article.Hashtag;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -13,7 +14,7 @@ public record ArticleWithCommentDto(
         Set<ArticleCommentDto> articleCommentDtos,
         String title,
         String content,
-        Set<HashtagDto> hashtagDtos,
+        Set<Hashtag> hashtagDtos,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
