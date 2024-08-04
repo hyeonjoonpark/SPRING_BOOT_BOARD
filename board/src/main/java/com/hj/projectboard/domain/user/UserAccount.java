@@ -1,4 +1,4 @@
-package com.hj.projectboard;
+package com.hj.projectboard.domain.user;
 
 import com.hj.projectboard.domain.AuditingFields;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.hj.projectboard.domain.article;
 
-import com.hj.projectboard.UserAccount;
+import com.hj.projectboard.domain.user.UserAccount;
 import com.hj.projectboard.domain.AuditingFields;
 import com.hj.projectboard.domain.article_comment.ArticleComment;
 import lombok.*;

@@ -9,11 +9,12 @@ import com.fastcampus.projectboard.dto.ArticleWithCommentsDto;
 import com.fastcampus.projectboard.repository.ArticleRepository;
 import com.fastcampus.projectboard.repository.HashtagRepository;
 import com.fastcampus.projectboard.repository.UserAccountRepository;
-import com.hj.projectboard.UserAccount;
+import com.hj.projectboard.domain.user.UserAccount;
 import com.hj.projectboard.domain.article.Article;
 import com.hj.projectboard.domain.article.Hashtag;
 import com.hj.projectboard.domain.article.constant.SearchType;
 import com.hj.projectboard.domain.article.presentation.dto.ArticleDto;
+import com.hj.projectboard.domain.article.presentation.dto.ArticleWithCommentsDto;
 import com.hj.projectboard.domain.article.repository.ArticleRepository;
 import com.hj.projectboard.domain.article.repository.HashtagRepository;
 import com.hj.projectboard.domain.article.service.HashtagService;
@@ -29,9 +30,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.hj.projectboard.domain.article.constant.SearchType.CONTENT;
-import static com.hj.projectboard.domain.article.constant.SearchType.TITLE;
 
 @Slf4j
 @RequiredArgsConstructor
