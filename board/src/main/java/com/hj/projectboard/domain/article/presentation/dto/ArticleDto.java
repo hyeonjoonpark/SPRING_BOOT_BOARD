@@ -1,7 +1,7 @@
 package com.hj.projectboard.domain.article.presentation.dto;
 
-import com.hj.projectboard.domain.user.UserAccount;
 import com.hj.projectboard.domain.article.Article;
+import com.hj.projectboard.domain.user.UserAccount;
 
 import java.time.LocalDateTime;
 import java.util.Set;

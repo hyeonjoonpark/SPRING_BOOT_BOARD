@@ -1,15 +1,5 @@
-package com.fastcampus.projectboard.service;
+package com.hj.projectboard.domain.article.service;
 
-import com.fastcampus.projectboard.domain.Article;
-import com.fastcampus.projectboard.domain.Hashtag;
-import com.fastcampus.projectboard.domain.UserAccount;
-import com.fastcampus.projectboard.domain.constant.SearchType;
-import com.fastcampus.projectboard.dto.ArticleDto;
-import com.fastcampus.projectboard.dto.ArticleWithCommentsDto;
-import com.fastcampus.projectboard.repository.ArticleRepository;
-import com.fastcampus.projectboard.repository.HashtagRepository;
-import com.fastcampus.projectboard.repository.UserAccountRepository;
-import com.hj.projectboard.domain.user.UserAccount;
 import com.hj.projectboard.domain.article.Article;
 import com.hj.projectboard.domain.article.Hashtag;
 import com.hj.projectboard.domain.article.constant.SearchType;
@@ -17,7 +7,8 @@ import com.hj.projectboard.domain.article.presentation.dto.ArticleDto;
 import com.hj.projectboard.domain.article.presentation.dto.ArticleWithCommentsDto;
 import com.hj.projectboard.domain.article.repository.ArticleRepository;
 import com.hj.projectboard.domain.article.repository.HashtagRepository;
-import com.hj.projectboard.domain.article.service.HashtagService;
+import com.hj.projectboard.domain.article.repository.UserAccountRepository;
+import com.hj.projectboard.domain.user.UserAccount;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -53,7 +44,7 @@ public class ArticleService {
             case CONTENT -> articleRepository.findByContentContaining(searchKeyword, pageable).map(ArticleDto::from);
             case ID -> articleRepository.findByUserAccount_UserIdContaining(searchKeyword, pageable).map(ArticleDto::from);
             case NICKNAME -> articleRepository.findByUserAccount_NicknameContaining(searchKeyword, pageable).map(ArticleDto::from);
-            case HASHTAG -> articleRepository.findByHashtagNames(
+            case HASHTAG -> articleRepository.findByHashtags(
                             Arrays.stream(searchKeyword.split(" ")).toList(),
                             pageable
                     )
@@ -131,13 +122,13 @@ public class ArticleService {
             return Page.empty(pageable);
         }
 
-        return articleRepository.findByHashtagNames(List.of(hashtagName), pageable)
+        return articleRepository.findByHashtags(List.of(hashtagName), pageable)
                 .map(ArticleDto::from);
     }
 
-    public List<String> getHashtags() {
-        return hashtagRepository.findAllHashtagNames(); // TODO: HashtagService 로 이동을 고려해보자.
-    }
+//    public List<String> getHashtags() {
+//        return hashtagRepository.findByHashtagName() // TODO: HashtagService 로 이동을 고려해보자.
+//    }
 
 
     private Set<Hashtag> renewHashtagsFromContent(String content) {

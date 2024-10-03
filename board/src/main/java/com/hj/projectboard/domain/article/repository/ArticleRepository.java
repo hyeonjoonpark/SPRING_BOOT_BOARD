@@ -2,6 +2,7 @@ package com.hj.projectboard.domain.article.repository;
 
 import aj.org.objectweb.asm.commons.Remapper;
 import com.hj.projectboard.domain.article.Article;
+import com.hj.projectboard.domain.article.Hashtag;
 import com.hj.projectboard.domain.article.QArticle;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
@@ -25,9 +26,9 @@ public interface ArticleRepository extends
     default void customize(QuerydslBindings bindings, QArticle root) {
         // default 값은 false
         bindings.excludeUnlistedProperties(true); // 리스팅을 하지 않은 프로퍼티는 검색 제외
-        bindings.including(root.title, root.content, root.hashTag, root.createdAt, root.createdBy);
+        bindings.including(root.title, root.content, root.hashtags, root.createdAt, root.createdBy);
         bindings.bind(root.title).first(StringExpression::containsIgnoreCase); // like '%${value}%' 쿼리 생성
-        bindings.bind(root.hashTag).first(StringExpression::containsIgnoreCase);
+        bindings.bind(root.hashtags.any().hashtagName).first(StringExpression::containsIgnoreCase);
         bindings.bind(root.createdAt).first(DateTimeExpression::eq);
         bindings.bind(root.createdBy).first(StringExpression::containsIgnoreCase);
     }
@@ -36,5 +37,7 @@ public interface ArticleRepository extends
     Page<Article> findByContentContaining(String content, Pageable pageable);
     Page<Article> findByUserAccount_UserIdContaining(String userId, Pageable pageable);
     Page<Article> findByUserAccount_NicknameContaining(String nickname, Pageable pageable);
-    Page<Article> findByHashtag(String hashtag, Pageable pageable);
+    Page<Article> findByHashtags(List<String> hashtagName, Pageable pageable);
+
+    void deleteByIdAndUserAccount_UserId(long articleId, String userId);
 }
