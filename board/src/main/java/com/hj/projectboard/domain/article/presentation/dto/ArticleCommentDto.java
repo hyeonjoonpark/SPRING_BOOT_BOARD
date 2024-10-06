@@ -51,4 +51,12 @@ public record ArticleCommentDto(
                 content
         );
     }
+
+    public ArticleComment toEntity(Article article, UserAccount userAccount) {
+        return ArticleComment.of(
+                article,
+                userAccount,
+                content
+        );
+    }
 }
