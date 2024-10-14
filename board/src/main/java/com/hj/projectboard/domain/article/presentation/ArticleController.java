@@ -38,6 +38,7 @@ public class ArticleController {
         map.addAttribute("articles", articles);
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(),articles.getTotalPages());
         map.addAttribute("paginationBarNumbers", barNumbers);
+        map.addAttribute("searchTypes", SearchType.values());
         return "articles/index";
     }
 
