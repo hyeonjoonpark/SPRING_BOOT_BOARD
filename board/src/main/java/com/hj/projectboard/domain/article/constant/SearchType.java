@@ -1,10 +1,8 @@
 package com.hj.projectboard.domain.article.constant;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public enum SearchType {
     TITLE("제목"),
     CONTENT("본문"),
@@ -13,4 +11,8 @@ public enum SearchType {
     HASHTAG("해시태그");
 
     private final String description;
+
+    SearchType(String description) {
+        this.description = description;
+    }
 }
