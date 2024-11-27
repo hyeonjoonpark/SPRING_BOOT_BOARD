@@ -1,9 +1,8 @@
 package com.hj.projectboard.domain.article.repository;
 
-import aj.org.objectweb.asm.commons.Remapper;
 import com.hj.projectboard.domain.article.Article;
-import com.hj.projectboard.domain.article.Hashtag;
 import com.hj.projectboard.domain.article.QArticle;
+import com.hj.projectboard.domain.article.repository.querydsl.CustomArticleRepository;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Page;
@@ -19,6 +18,7 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
+        CustomArticleRepository,
         QuerydslPredicateExecutor<Article>, // 기본적으로 엔티티 안에 있는 모든 필드에 대한 기본 검색 기능 추가
         QuerydslBinderCustomizer<QArticle> // 추가로 커스텀 검색기능을 추가하기 위해 작성
 {

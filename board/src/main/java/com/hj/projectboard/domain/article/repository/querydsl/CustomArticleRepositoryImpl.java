@@ -16,9 +16,9 @@ public class CustomArticleRepositoryImpl extends QuerydslRepositorySupport imple
     public List<String> findAllDistinctHashtags() {
         QArticle article = QArticle.article;
 
-//        JPQLQuery<Boolean> query = from(article)
-//                .distinct().select(article.hashtag)
-//                .where(article.hashtag);
-        return List.of();
+        return from(article)
+                .distinct().select(article.hashtag)
+                .where(article.hashtag.isNotNull())
+                .fetch();
     }
 }
