@@ -126,9 +126,9 @@ public class ArticleService {
                 .map(ArticleDto::from);
     }
 
-//    public List<String> getHashtags() {
-//        return hashtagRepository.findByHashtagName() // TODO: HashtagService 로 이동을 고려해보자.
-//    }
+    public List<String> getHashtags() {
+        return hashtagRepository.findAllHashtagNames();
+    }
 
 
     private Set<Hashtag> renewHashtagsFromContent(String content) {
