@@ -1,8 +1,8 @@
 package com.hj.projectboard.domain.article;
 
-import com.hj.projectboard.domain.user.UserAccount;
 import com.hj.projectboard.domain.AuditingFields;
 import com.hj.projectboard.domain.article_comment.ArticleComment;
+import com.hj.projectboard.domain.user.UserAccount;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -11,14 +11,12 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Getter
-@ToString(callSuper = true)
+@Getter @Entity @ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article extends AuditingFields {
 
@@ -41,7 +39,6 @@ public class Article extends AuditingFields {
             inverseJoinColumns = @JoinColumn(name = "hashtagId")
     )
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @Setter
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
 
@@ -49,7 +46,6 @@ public class Article extends AuditingFields {
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
 
     private Article(UserAccount userAccount, String title, String content) {
         this.userAccount = userAccount;
